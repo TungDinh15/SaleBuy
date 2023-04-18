@@ -80,13 +80,8 @@ module.exports = function (app) {
   app.post("/login", (req, res) => {
 
     // Check Username if exist
-    User.findOne({ Username: req.body.Username }, (err, data) => {
-      if (err) {
-        res.json({
-          result: 0,
-          errMsg: err
-        });
-      } else {
+    User.findOne({ Username: req.body.Username })
+      .then(data => {
         if (!data) {
           res.json({
             result: 0,
@@ -114,7 +109,7 @@ module.exports = function (app) {
                     Address: data.Address,
                     PhoneNumber: data.PhoneNumber,
                     Active: data.Active,
-                    RegisterDate: data.RegisterDate,
+                    RegisterDate: Date.now(),
                     DeviceInfo: req.headers,  // Tracking with browser user login by
                   },
                   // Private Key
@@ -134,23 +129,23 @@ module.exports = function (app) {
                       var currentToken = new Token({
                         Token: token,
                         User: data._id,
-                        RegisterDate: Date.Now(),
+                        RegisterDate: Date.now(),
                         State: true
                       });
 
-                      currentToken.save((err) => {
-                        if (err) {
-                          res.json({
-                            result: 0,
-                            errMsg: err
-                          });
-                        } else {
+                      currentToken.save(err, data)
+                        .then(token => {
                           res.json({
                             result: 1,
                             Token: token
                           });
-                        }
-                      })
+                        })
+                        .catch(err => {
+                          res.json({
+                            result: 0,
+                            errMsg: err
+                          });
+                        })
                     }
                   });
 
@@ -163,8 +158,13 @@ module.exports = function (app) {
             }
           });
         }
-      }
-    });
+      })
+      .catch(err => {
+        res.json({
+          result: 0,
+          errMsg: err
+        });
+      });
   });
+};
 
-}
