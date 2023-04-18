@@ -133,7 +133,7 @@ module.exports = function (app) {
                         State: true
                       });
 
-                      currentToken.save(err, data)
+                      currentToken.save(err, token)
                         .then(token => {
                           res.json({
                             result: 1,
@@ -166,5 +166,52 @@ module.exports = function (app) {
         });
       });
   });
-};
+
+  // VERIFY TOKEN
+  app.post("/verifyToken", function (req, res) {
+    Token.findOne({ Token: req.body.Token, State: true })
+      .select("_id")
+      .lean()
+      .then(data => {
+        if (!data) {
+          res.json({
+            result: 0,
+            errMsg: "Error Token"
+          });
+        } else {
+          jwt.verify(req.body.Token, privateKey, (err, decoded) => {
+            if (!err && decoded !== undefined) {
+              res.json({
+                result: 1,
+                User: decoded
+              });
+            } else {
+              res.json({
+                result: 0,
+                errMsg: "Token error."
+              });
+            }
+          });
+        }
+      });
+  });
+
+  // LOGOUT ROUTE
+  app.post("/logout", (req, res) => {
+    Token.updateOne({ Token: req.body.Token }, { State: false })
+    .then(() => {
+      res.json({
+        result: 1,
+        errMsg: "Logout Successfully."
+      });
+    })
+    .catch(err => {
+      res.json({
+        result: 0,
+        errMsg: err
+      });
+    })
+  })
+
+}
 
