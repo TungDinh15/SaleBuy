@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		52140BC729ED231E00B6EFD3 /* Welcome_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52140BC629ED231E00B6EFD3 /* Welcome_ViewController.swift */; };
+		52140BCA29ED2BD200B6EFD3 /* Category_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52140BC929ED2BD200B6EFD3 /* Category_ViewController.swift */; };
+		52140BCD29ED2C2D00B6EFD3 /* YourList_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52140BCC29ED2C2D00B6EFD3 /* YourList_ViewController.swift */; };
+		52140BD029ED2C7500B6EFD3 /* Dashboard_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52140BCF29ED2C7500B6EFD3 /* Dashboard_ViewController.swift */; };
 		528D9A8B29CAB9CC000B39C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528D9A8A29CAB9CC000B39C2 /* AppDelegate.swift */; };
 		528D9A8D29CAB9CC000B39C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528D9A8C29CAB9CC000B39C2 /* SceneDelegate.swift */; };
 		528D9A8F29CAB9CC000B39C2 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528D9A8E29CAB9CC000B39C2 /* ViewController.swift */; };
@@ -14,9 +18,14 @@
 		528D9A9429CAB9D0000B39C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 528D9A9329CAB9D0000B39C2 /* Assets.xcassets */; };
 		528D9A9729CAB9D0000B39C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 528D9A9529CAB9D0000B39C2 /* LaunchScreen.storyboard */; };
 		528D9AA129CADDE9000B39C2 /* Register_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 528D9AA029CADDE9000B39C2 /* Register_ViewController.swift */; };
+		52E8A82B29DFCA4200D8D8C6 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52E8A82A29DFCA4200D8D8C6 /* Config.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		52140BC629ED231E00B6EFD3 /* Welcome_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Welcome_ViewController.swift; sourceTree = "<group>"; };
+		52140BC929ED2BD200B6EFD3 /* Category_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category_ViewController.swift; sourceTree = "<group>"; };
+		52140BCC29ED2C2D00B6EFD3 /* YourList_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourList_ViewController.swift; sourceTree = "<group>"; };
+		52140BCF29ED2C7500B6EFD3 /* Dashboard_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard_ViewController.swift; sourceTree = "<group>"; };
 		528D9A8729CAB9CC000B39C2 /* SaleBuy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SaleBuy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		528D9A8A29CAB9CC000B39C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		528D9A8C29CAB9CC000B39C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +35,7 @@
 		528D9A9629CAB9D0000B39C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		528D9A9829CAB9D0000B39C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		528D9AA029CADDE9000B39C2 /* Register_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register_ViewController.swift; sourceTree = "<group>"; };
+		52E8A82A29DFCA4200D8D8C6 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +49,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		52140BC529ED22F700B6EFD3 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				52140BC629ED231E00B6EFD3 /* Welcome_ViewController.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		52140BC829ED2BB600B6EFD3 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				52140BC929ED2BD200B6EFD3 /* Category_ViewController.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		52140BCB29ED2C0600B6EFD3 /* YourList */ = {
+			isa = PBXGroup;
+			children = (
+				52140BCC29ED2C2D00B6EFD3 /* YourList_ViewController.swift */,
+			);
+			path = YourList;
+			sourceTree = "<group>";
+		};
+		52140BCE29ED2C4300B6EFD3 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				52140BCF29ED2C7500B6EFD3 /* Dashboard_ViewController.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
 		528D9A7E29CAB9CC000B39C2 = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +108,7 @@
 				528D9A9329CAB9D0000B39C2 /* Assets.xcassets */,
 				528D9A9529CAB9D0000B39C2 /* LaunchScreen.storyboard */,
 				528D9A9829CAB9D0000B39C2 /* Info.plist */,
+				52E8A82A29DFCA4200D8D8C6 /* Config.swift */,
 			);
 			path = SaleBuy;
 			sourceTree = "<group>";
@@ -73,6 +116,10 @@
 		528D9A9E29CABA08000B39C2 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				52140BCE29ED2C4300B6EFD3 /* Dashboard */,
+				52140BCB29ED2C0600B6EFD3 /* YourList */,
+				52140BC829ED2BB600B6EFD3 /* Category */,
+				52140BC529ED22F700B6EFD3 /* Welcome */,
 				528D9A9F29CADD89000B39C2 /* Register */,
 			);
 			path = Screens;
@@ -158,9 +205,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				528D9A8F29CAB9CC000B39C2 /* ViewController.swift in Sources */,
+				52140BCD29ED2C2D00B6EFD3 /* YourList_ViewController.swift in Sources */,
 				528D9A8B29CAB9CC000B39C2 /* AppDelegate.swift in Sources */,
+				52E8A82B29DFCA4200D8D8C6 /* Config.swift in Sources */,
 				528D9A8D29CAB9CC000B39C2 /* SceneDelegate.swift in Sources */,
 				528D9AA129CADDE9000B39C2 /* Register_ViewController.swift in Sources */,
+				52140BC729ED231E00B6EFD3 /* Welcome_ViewController.swift in Sources */,
+				52140BCA29ED2BD200B6EFD3 /* Category_ViewController.swift in Sources */,
+				52140BD029ED2C7500B6EFD3 /* Dashboard_ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

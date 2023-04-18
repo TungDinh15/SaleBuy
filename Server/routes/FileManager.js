@@ -36,22 +36,28 @@ module.exports = (app) => {
     upload(req, res, (err) => {
       // error relating to Multer's error
       if (err instanceof multer.MulterError) {
-        res.json({
-          result: 0,
-          message: err
-        });
+        setTimeout(() => {
+          res.json({
+            result: 0,
+            message: err
+          });
+        }, 3000)
       }
       // another errors
       else if (err) {
-        res.json({
-          result: 0,
-          message: err
-        });
+        setTimeout(() => {
+          res.json({
+            result: 0,
+            message: err
+          });
+        }, 3000)
       } else {
-        res.json({
-          result: 1,
-          urlFile: req.file,
-        });
+        setTimeout(() => {
+          res.json({
+            result: 1,
+            urlFile: req.file,
+          });
+        }, 3000)
       }
     });
   })

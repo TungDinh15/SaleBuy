@@ -23,9 +23,13 @@ mongoose
   })
   .catch(err => console.log(err.message));
 
+
+// body-parser
 app.get("/", function (req, res) {
   res.render("home");
 });
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
 
 require("./routes/FileManager")(app);
 require("./routes/Account")(app);
