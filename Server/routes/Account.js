@@ -110,7 +110,7 @@ module.exports = function (app) {
                     PhoneNumber: data.PhoneNumber,
                     Active: data.Active,
                     RegisterDate: Date.now(),
-                    DeviceInfo: req.headers,  // Tracking with browser user login by
+                    // DeviceInfo: req.headers,  // Tracking with browser user login by
                   },
                   // Private Key
                   privateKey,
@@ -133,8 +133,8 @@ module.exports = function (app) {
                         State: true
                       });
 
-                      currentToken.save(err, token)
-                        .then(token => {
+                      currentToken.save()
+                        .then(() => {
                           res.json({
                             result: 1,
                             Token: token
