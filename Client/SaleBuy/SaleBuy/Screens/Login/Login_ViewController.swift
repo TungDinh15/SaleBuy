@@ -41,24 +41,27 @@ class Login_ViewController: UIViewController {
                 guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
 
                 if(json["result"] as! Int == 1) {
-                    // Thanh cong
+                    // Login Successfully
 
                     let defaults = UserDefaults.standard
                     defaults.set(json["Token"], forKey: "UserToken");
                     print(json)
-        
+
+                    // Notification
                     DispatchQueue.main.async {
                         let alertView = UIAlertController(title: "Notification", message: "Login successfully", preferredStyle: .alert)
+                        
                         alertView.addAction(UIAlertAction(title: "Okay", style: .default,
                             handler: { (action: UIAlertAction!) in
 
+                                // Navigate to Dashboard Screen
                                 let sb = UIStoryboard(name: "Main", bundle: nil)
                                 let dashboard_VC = sb.instantiateViewController(identifier: "DASHBOARD") as! Dashboard_ViewController
                                 self.navigationController?.pushViewController(dashboard_VC, animated: false)
-
                             }))
+                        
                         self.present(alertView, animated: true, completion: nil)
-                    } 
+                    }
 
                 } else {
                     DispatchQueue.main.async {

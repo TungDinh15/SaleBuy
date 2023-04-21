@@ -33,3 +33,5 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 require("./routes/FileManager")(app);
 require("./routes/Account")(app);
+require("./routes/City")(app);
+

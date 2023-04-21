@@ -1,0 +1,39 @@
+<script>
+  $(document).ready(() => {
+
+    var url = "http://localhost:3000";
+
+    $.post(url + "/city", (data2) => {
+      console.log(data2);
+      if (data2.result == 1) {
+        $("#city_List").html("");
+        data2.list.forEach(function (city) {
+          $("#city_List").append(`
+            <li class="city" cityID="` + city._id + `">` + city.Name + `</li>
+          `);
+        });
+      }
+    });
+
+    $(document).on("click", ".city", () => {
+      var Ten = $(this);
+      $("#cityName_update").val(Ten);
+    });
+
+  });
+</script>
+
+<div id="city_formAddnew">
+  <input type="text" id="cityName" placeholder="City" />
+  <input type="button" id="btn_AddNewCity" value="Add" />
+</div>
+
+<ul id="city_List">
+
+</ul>
+
+<div id="city_formUpdate">
+  <input type="text" id="cityName_update" placeholder="City" />
+  <input type="button" id="btn_UpdateCity" value="Update" />
+  <input type="button" id="btn_DeleteCity" value="Delete" />
+</div>

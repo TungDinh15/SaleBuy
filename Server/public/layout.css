@@ -1,0 +1,40 @@
+body {
+  font-size: 20px;
+  background-color: gainsboro;
+}
+
+#wrapper {
+  width: 100%;
+}
+
+#left {
+  width: 20%;
+  float: left;
+}
+
+#left #logo {
+  width: 90%;
+}
+
+#content {
+  width: 80%;
+  background-color: darkgrey;
+  min-height: 410px;
+  float: right;
+  border-radius: 5px;
+}
+
+#menu a:link, #menu a:visited {
+  text-decoration: none;
+  display: block;
+  padding: 10px;
+  background-color: black;
+  color: white;
+  margin-bottom: 3px;
+  border-radius: 5px;
+}
+
+#menu a:hover {
+  background-color: rgb(238, 238, 219);
+  color: black;
+}

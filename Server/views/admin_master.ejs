@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administrator - SaleBuy App </title>
+  <link rel="stylesheet" type="text/css" href="./layout.css" />
+  <script src="./jquery.js"></script>
+  <script src="./js/ajax.js"></script>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="left">
+      <img id="logo" src="./images/logo2.png" alt="" />
+      <div id="menu">
+        <a href="./city"> City </a>
+        <a href="./category"> Group of Product </a>
+        <a href="./token"> Token </a>
+      </div>
+    </div>
+    <div id="content">
+      Content
+      <%- include(content) %>
+    </div>
+  </div>
+</body>
+
+</html>
