@@ -33,46 +33,83 @@ class Login_ViewController: UIViewController {
         let postData = sData.data(using: .utf8)
         request.httpBody = postData
 
-        let taskUserRegister = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-            guard error == nil else { print("error"); return }
-            guard let data = data else { return }
+        let taskUserRegister = URLSession.shared.dataTask(
+            with: request,
+            completionHandler: { data, response, error in
+                guard error == nil else { print("error"); return }
+                guard let data = data else { return }
 
-            do {
-                guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
+                do {
+                    guard let json = try JSONSerialization.jsonObject(
+                        with: data,
+                        options: .mutableContainers
+                    ) as? [String: Any]
+                        else { return }
 
-                if(json["result"] as! Int == 1) {
-                    // Login Successfully
+                    if (json["result"] as! Int == 1) {
+                        // Login Successfully
 
-                    let defaults = UserDefaults.standard
-                    defaults.set(json["Token"], forKey: "UserToken");
-                    print(json)
+                        let defaults = UserDefaults.standard
+                        defaults.set(
+                            json["Token"],
+                            forKey: "UserToken"
+                        );
+                        print(json)
 
-                    // Notification
-                    DispatchQueue.main.async {
-                        let alertView = UIAlertController(title: "Notification", message: "Login successfully", preferredStyle: .alert)
-                        
-                        alertView.addAction(UIAlertAction(title: "Okay", style: .default,
-                            handler: { (action: UIAlertAction!) in
+                        // Notification
+                        DispatchQueue.main.async {
+                            let alertView = UIAlertController(
+                                title: "Notification",
+                                message: "Login successfully",
+                                preferredStyle: .alert
+                            )
 
-                                // Navigate to Dashboard Screen
-                                let sb = UIStoryboard(name: "Main", bundle: nil)
-                                let dashboard_VC = sb.instantiateViewController(identifier: "DASHBOARD") as! Dashboard_ViewController
-                                self.navigationController?.pushViewController(dashboard_VC, animated: false)
-                            }))
-                        
-                        self.present(alertView, animated: true, completion: nil)
+                            alertView.addAction(UIAlertAction(
+                                title: "Okay",
+                                style: .default,
+                                handler: { (action: UIAlertAction!) in
+
+                                    // Navigate to Dashboard Screen
+                                    let sb = UIStoryboard(name: "Main", bundle: nil)
+                                    let dashboard_VC = sb.instantiateViewController(
+                                        identifier: "DASHBOARD") as! Dashboard_ViewController
+                                    self.navigationController?.pushViewController(
+                                        dashboard_VC,
+                                        animated: false
+                                    )
+                                }
+                            ))
+
+                            self.present(
+                                alertView,
+                                animated: true,
+                                completion: nil
+                            )
+                        }
+
+                    } else {
+                        DispatchQueue.main.async {
+                            let alertView = UIAlertController(
+                                title: "Notification",
+                                message: (json["errMsg"] as! String),
+                                preferredStyle: .alert
+                            )
+                            alertView.addAction(UIAlertAction(
+                                title: "Okay",
+                                style: .default,
+                                handler: nil
+                                )
+                            )
+                            self.present(
+                                alertView,
+                                animated: true,
+                                completion: nil
+                            )
+                        }
                     }
 
-                } else {
-                    DispatchQueue.main.async {
-                        let alertView = UIAlertController(title: "Notification", message: (json["errMsg"] as! String), preferredStyle: .alert)
-                        alertView.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                        self.present(alertView, animated: true, completion: nil)
-                    }
-                }
-
-            } catch let error { print(error.localizedDescription) }
-        })
+                } catch let error { print(error.localizedDescription) }
+            })
         taskUserRegister.resume()
     }
 

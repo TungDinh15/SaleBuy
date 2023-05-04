@@ -47,7 +47,10 @@ class Register_ViewController: UIViewController, UINavigationControllerDelegate,
 
         var urlRequest = URLRequest(url: url!)
         urlRequest.httpMethod = "POST"
-        urlRequest.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        urlRequest.setValue(
+            "multipart/form-data; boundary=\(boundary)",
+            forHTTPHeaderField: "Content-Type"
+        )
 
         // config the image data variable
         var data = Data()
@@ -57,74 +60,103 @@ class Register_ViewController: UIViewController, UINavigationControllerDelegate,
         data.append((imgAvatar.image?.pngData())!)
         data.append("\r\n--\(boundary)--\r\n".data(using: .utf8)!)
 
-        session.uploadTask(with: urlRequest, from: data, completionHandler: { [self]
-            responseData, response, error in
-            if error == nil {
-                let jsonData = try? JSONSerialization.jsonObject(with: responseData!, options: .allowFragments)
-                if let json = jsonData as? [String: Any] {
-                    if (json["result"] as! Int == 1) {
+        session.uploadTask(
+            with: urlRequest,
+            from: data,
+            completionHandler: { [self] responseData, response, error in
 
-                        let urlFile = json["urlFile"] as? [String: Any]
+                if error == nil {
+                    let jsonData = try? JSONSerialization.jsonObject(
+                        with: responseData!,
+                        options: .allowFragments
+                    )
 
-                        DispatchQueue.main.async {
+                    if let json = jsonData as? [String: Any] {
 
-                            url = URL(string: Config.ServerURL + "/register")
-                            var request = URLRequest(url: url!)
-                            request.httpMethod = "POST"
+                        if (json["result"] as! Int == 1) {
 
-                            let fileName = urlFile!["filename"] as! String
-                            var sData = "Username=" + self.txt_Username.text!
-                            sData += "&Password=" + self.txt_Password.text!
-                            sData += "&Name=" + self.txt_Name.text!
-                            sData += "&Image=" + fileName
-                            sData += "&Email=" + self.txt_Email.text!
-                            sData += "&Address=" + self.txt_Address.text!
-                            sData += "&PhoneNumber=" + self.txt_PhoneNumber.text!
+                            let urlFile = json["urlFile"] as? [String: Any]
 
+                            DispatchQueue.main.async {
 
-                            let postData = sData.data(using: .utf8)
-                            request.httpBody = postData
+                                url = URL(string: Config.ServerURL + "/register")
+                                var request = URLRequest(url: url!)
+                                request.httpMethod = "POST"
 
-                            let taskUserRegister = URLSession.shared.dataTask(with: request, completionHandler: { data, response, error in
-                                guard error == nil else {
-                                    print("error");
-                                    return
-                                }
-                                guard let data = data else { return }
-
-                                do {
-                                    guard let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any] else { return }
-
-                                    DispatchQueue.main.async {
-                                        self.mySpinner.isHidden = true
-                                    }
+                                let fileName = urlFile!["filename"] as! String
+                                var sData = "Username=" + self.txt_Username.text!
+                                sData += "&Password=" + self.txt_Password.text!
+                                sData += "&Name=" + self.txt_Name.text!
+                                sData += "&Image=" + fileName
+                                sData += "&Email=" + self.txt_Email.text!
+                                sData += "&Address=" + self.txt_Address.text!
+                                sData += "&PhoneNumber=" + self.txt_PhoneNumber.text!
 
 
+                                let postData = sData.data(using: .utf8)
+                                request.httpBody = postData
 
-                                    if (json["result"] as! Int == 1) {
-                                        // Success
-                                        // Navigate to Login Screen
-                                        print("ahihi")
-
-                                    } else {
-                                        print(json)
-                                        DispatchQueue.main.async {
-                                            let alertView = UIAlertController(title: "Notification", message: (json["errMsg"] as! String), preferredStyle: .alert)
-                                            alertView.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
-                                            self.present(alertView, animated: true, completion: nil)
+                                let taskUserRegister = URLSession.shared.dataTask(
+                                    with: request,
+                                    completionHandler: { data, response, error in
+                                        guard error == nil else {
+                                            print("error");
+                                            return
                                         }
-                                    }
+                                        guard let data = data else { return }
 
-                                } catch let error { print(error.localizedDescription) }
-                            })
-                            taskUserRegister.resume()
+                                        do {
+                                            guard let json = try JSONSerialization.jsonObject(
+                                                with: data,
+                                                options: .mutableContainers
+                                            ) as? [String: Any]
+                                                else { return }
+
+                                            DispatchQueue.main.async {
+                                                self.mySpinner.isHidden = true
+                                            }
+
+
+
+                                            if (json["result"] as! Int == 1) {
+                                                // Success
+                                                // Navigate to Login Screen
+                                                print("ahihi")
+
+                                            } else {
+                                                print(json)
+                                                DispatchQueue.main.async {
+                                                    let alertView = UIAlertController(
+                                                        title: "Notification",
+                                                        message: (json["errMsg"] as! String),
+                                                        preferredStyle: .alert
+                                                    )
+                                                    alertView.addAction(UIAlertAction(
+                                                        title: "Okay",
+                                                        style: .default,
+                                                        handler: nil
+                                                        )
+                                                    )
+                                                    self.present(
+                                                        alertView,
+                                                        animated: true,
+                                                        completion: nil
+                                                    )
+                                                }
+                                            }
+
+                                        } catch let error {
+                                            print(error.localizedDescription)
+                                        }
+                                    })
+                                taskUserRegister.resume()
+                            }
+                        } else {
+                            print("Upload failed!")
                         }
-                    } else {
-                        print("Upload failed!")
                     }
                 }
-            }
-        }).resume()
+            }).resume()
     }
 
     // Choose photo from Gallery by open the new nav to pickup one
